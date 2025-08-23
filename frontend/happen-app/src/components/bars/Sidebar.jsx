@@ -4,11 +4,12 @@ import { DayPicker } from "react-day-picker";
 import { useState } from 'react';
 import { CiCalendar } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
+import { IoMdClose } from "react-icons/io";
 import "react-day-picker/dist/style.css";
 import moment from 'moment';
 import { getInitials } from '../../utils/helper';
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [range, setRange] = useState(null);
   
   const data = [
@@ -19,7 +20,8 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className='hidden h-[100vh] md:inline fixed right-5 w-1/4 px-4 py-2 pr-0'>
+    <div className={`${isSidebarOpen?'inline bg-white':'hidden'} h-[100vh] md:inline fixed right-0 md:right-5 md:w-1/4 px-4 py-2 md:pr-0`}>
+      <button className='inline md:hidden bg-[#B7410E]/10 p-1 rounded-md mb-1.5' onClick={() => setIsSidebarOpen(false)}><IoMdClose /></button>
       <ProfileInfoCard/>
       {/* <div className='p-5 bg-[#FAF5E0] rounded-xl m-5 mr-2'>
         <DayPicker

@@ -22,11 +22,13 @@ const Dashboard = () => {
     getUser();
   },[])
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
     <div className='p-3 md:p-5 flex text-[#B7410E] h-[100vh]'>
       <UserContext.Provider value={userData}>
-        <ContentLayer/>
-        <Sidebar/>
+        <ContentLayer setIsSidebarOpen={setIsSidebarOpen}/>
+        <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>
       </UserContext.Provider>
     </div>
   )

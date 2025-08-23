@@ -9,8 +9,7 @@ import moment from 'moment'
 import { getInitials } from '../../utils/helper';
 import EventModal from '../EventModal';
 
-const ContentLayer = () => {
-
+const ContentLayer = ({ setIsSidebarOpen }) => {
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -35,7 +34,7 @@ const ContentLayer = () => {
 
   return (
     <div className='bg-[#FAF5E0] w-screen md:w-3/4 p-4 md:p-6 rounded-2xl flex flex-col'>
-        <Topbar/>
+        <Topbar setIsSidebarOpen={setIsSidebarOpen} />
         <div className='flex-1 overflow-y-auto scrollbar-hide'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-10 p-3 pt-9'>
           <div className='flex flex-col justify-center items-center gap-2 bg-white rounded-2xl border-2 border-dashed border-[#B7410E]/60 cursor-pointer h-[40vh]' onClick={() => setOpenModal(true)}>
