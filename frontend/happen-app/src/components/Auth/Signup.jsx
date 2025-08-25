@@ -67,7 +67,7 @@ const Signup = ({ setType, onClose }) => {
         onClose();
         toast.success(response.data.message);
         if(response.data.user.isVerified) {
-          navigate('/dashboard');
+          navigate('/Dashboard');
         }
       }
 

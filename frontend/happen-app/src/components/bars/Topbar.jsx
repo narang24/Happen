@@ -11,7 +11,7 @@ const Topbar = ({ setIsSidebarOpen }) => {
     <div className='bg-[#FAF5E0] pb-3 flex justify-between'>
 
       <div className='w-full md:w-auto flex justify-between md:justify-center items-center gap-2 md:gap-16'>
-      <div className='flex md:justify-center items-center gap-1.5 md:gap-3'>
+      <div className='flex md:hidden md:justify-center items-center gap-1.5 md:gap-3'>
           <img src='/happen-logo.jpg' alt="logo" className='h-8 w-8 rounded-full'/>
           <h1 className='text-[#B7410E] font-[500] text-[17px]'>Happen</h1>
       </div>

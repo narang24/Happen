@@ -42,7 +42,7 @@ const Login = ({ setType, onClose }) => {
         localStorage.setItem('token',response.data.token);
         onClose();
         toast.success(response.data.message);
-        navigate('/dashboard');
+        navigate('/Dashboard');
       }
 
     } catch(error) {
