@@ -13,7 +13,7 @@ const EventSchema = new mongoose.Schema(
         participants: [
             {
                 email: {type: String, required: true},
-                status: {type: String, enum: ['accepted','pending','declined'], default: 'pending'}
+                status: {type: String, enum: ['Accepted','Pending','Declined'], default: 'Pending'}
             }
         ],
         userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true}

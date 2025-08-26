@@ -44,7 +44,7 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
         </div>
         <div className='py-5 flex flex-col gap-5'>
           {data.map((item, index) => (
-            <div className='bg-white border border-[#B7410E]/15 flex gap-5 p-4 rounded-xl'>
+            <div className='bg-white border border-[#B7410E]/15 flex gap-5 p-4 rounded-xl'key={index}>
               <img src={item.img} alt="pic" className='h-18 w-18 rounded-xl' />
               <div className='text-sm flex flex-col gap-1'>
                 <p className='font-semibold'>{item.title}</p>

@@ -8,6 +8,7 @@ import Dashboard from './components/Tabs/TabPages/Dashboard'
 import Invitations from './components/Tabs/TabPages/Invitations'
 import Friends from './components/Tabs/TabPages/Friends'
 import Events from './components/Tabs/TabPages/Events'
+import EventDetails from './components/Layers/EventDetails'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path='/' exact element={<DashboardLayout />}>
             <Route path='/Dashboard' exact element={<Dashboard/>}/>
             <Route path='/Events' exact element={<Events/>}/>
+            <Route path='/Events/get-event/:id' exact element={<EventDetails />}/>
             <Route path='/Invitations' exact element={<Invitations/>}/>
             <Route path='/Friends' exact element={<Friends/>}/>
           </Route>
