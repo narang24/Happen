@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axiosInstance from '../../utils/axiosInstance';
 import moment from 'moment';
 import { IoLocationOutline } from 'react-icons/io5';
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { TbEdit } from "react-icons/tb";
+import { MdDelete } from "react-icons/md";
 import { HiOutlineTrash } from "react-icons/hi2";
 import { getInitials, validateEmail } from '../../utils/helper';
+import EventModal from '../EventModal';
+import toast from 'react-hot-toast';
 
 const EventDetails = () => {
+
+  const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
   const [eventData, setEventData] = useState(null);
   const { id } = useParams();
@@ -20,11 +28,24 @@ const EventDetails = () => {
     const response = await axiosInstance.get(`/api/event/get-event/${id}`);
     if(response.data) {
       setEventData(response.data);
-      console.log(response.data);
     }
   } catch(error) {
     console.log('Server Error');
   }
+  }
+
+  const deleteEvent = async () => {
+    try {
+        const response = await axiosInstance.delete(`/api/event/delete-event/${id}`);
+        if(response.data && response.data.message) {
+            toast.success(response.data.message, {
+                duration: 700
+            });
+            navigate('/Events');
+        }
+    } catch(error) {
+        console.log('Server Error');
+    }
   }
 
   const addEmail = () => {}
@@ -34,7 +55,17 @@ const EventDetails = () => {
   },[id]);
 
   return (
-    <div className='mt-9 flex gap-5'>
+    <div className='flex flex-col mt-9'>
+
+      <div className='flex justify-between items-center mb-5'>
+        <button className='flex items-center gap-2 text-xs px-4 py-3 border border-[#B7410E]/20 rounded-lg cursor-pointer font-semibold' onClick={() => navigate('/Events')}><IoMdArrowRoundBack className='text-[15px]'/> Back</button>
+        <div className='flex items-center gap-3'>
+            <button className='flex items-center gap-2 bg-[#B7410E]/90 text-white text-xs px-4 py-3 rounded-lg cursor-pointer' onClick={() => setOpenModal(true)}><TbEdit className='text-[15px]'/> Edit</button>
+            <button className='flex items-center gap-2 text-xs px-4 py-3 border border-[#B7410E]/20 rounded-lg cursor-pointer font-semibold' onClick={deleteEvent}><MdDelete className='text-[15px]'/> Delete</button>
+        </div>
+      </div>
+
+      <div className='flex flex-col md:flex-row gap-5'>
       
       <div className='flex-1'>
       {eventData &&
@@ -54,7 +85,7 @@ const EventDetails = () => {
 
           <div>
           <p className='text-[13px] font-semibold'>{moment(eventData.date).format("DD MMM YYYY")}</p>
-          <p className='text-[13px]'>{eventData.time.start} - {eventData.time.end}</p>
+          {/* <p className='text-[13px]'>{eventData.time.start} - {eventData.time.end}</p> */}
           </div>
         </div>
         </div>
@@ -99,6 +130,16 @@ const EventDetails = () => {
 
       </div>
 
+      </div>
+
+      {openModal && <EventModal 
+      type='Edit'
+      getAllEvents={null}
+      eventData={eventData}
+      getEvent={getEvent}
+      onClose={() => setOpenModal(!openModal)}
+      />}
+    
     </div>
   )
 }

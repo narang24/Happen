@@ -9,6 +9,7 @@ import Invitations from './components/Tabs/TabPages/Invitations'
 import Friends from './components/Tabs/TabPages/Friends'
 import Events from './components/Tabs/TabPages/Events'
 import EventDetails from './components/Layers/EventDetails'
+import Sample from './Sample'
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path='/Invitations' exact element={<Invitations/>}/>
             <Route path='/Friends' exact element={<Friends/>}/>
           </Route>
+          <Route path='/sample' exact element={<Sample/>}/>
         </Routes>
       </Router>
 

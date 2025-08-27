@@ -79,8 +79,11 @@ const Dashboard = ({ setIsSidebarOpen }) => {
       </div>
 
       {openModal && <EventModal 
-      onClose={() => setOpenModal(!openModal)}
+      type='Create'
       getAllEvents={getAllEvents}
+      eventData={null}
+      getEvent={null}
+      onClose={() => setOpenModal(!openModal)}
       />}
     </div>
   )

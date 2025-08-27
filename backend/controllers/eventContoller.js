@@ -61,7 +61,7 @@ exports.editEvent = async (req, res)  => {
     const { id } = req.params;
     const userId = req.user.id;
 
-    const { title, date, time, location, description, participants} = req.body;
+    const { title, date, time, location, description, participants } = req.body;
 
     if(!title || !date || !location) 
         return res.status(400).json({ message: 'All Required fields must be filled'});
