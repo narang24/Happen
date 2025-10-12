@@ -1,6 +1,6 @@
 const express = require('express');
 const { protect } = require('../middleware/authMiddleware');
-const { addEvent, getAllEvents, getEvent, editEvent, deleteEvent } = require('../controllers/eventContoller');
+const { addEvent, getAllEvents, getEvent, editEvent, deleteEvent, inviteEmail } = require('../controllers/eventContoller');
 const { getRecentScheduledEvents } = require('../controllers/recentScheduled');
 
 const router = express.Router();
@@ -11,5 +11,8 @@ router.get('/get-event/:id', protect, getEvent);
 router.put('/edit-event/:id', protect, editEvent);
 router.delete('/delete-event/:id', protect, deleteEvent);
 router.get('/get-recent-scheduled', protect, getRecentScheduledEvents);
+
+//invite-routes
+router.post('/get-event/:id/invite', protect, inviteEmail);
 
 module.exports = router;

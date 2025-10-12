@@ -147,7 +147,7 @@ const Sample = () => {
             >
               <FaTimes className="w-5 h-5" />
             </button>
-          </div>
+          </div> 
           <div className="p-6">
             {children}
           </div>

@@ -1,3 +1,4 @@
+const sendMail = require('../helpers/sendMail');
 const Event = require('../models/Event');
 
 exports.addEvent = async (req, res) => {
@@ -100,5 +101,22 @@ exports.deleteEvent = async (req, res) => {
 
     } catch(error) {
         res.status(500).json({ message: "Server error" });
+    }
+}
+
+exports.inviteEmail = async(req, res) => {
+    const userId = req.user.id;
+    const { id } = req.params;
+    const { email } = req.body;
+
+    if(!email) return res.status(400).json({ message:'Email is required' });
+
+    try {
+        const event = await Event.findOne({ userId, _id: id });
+        if(!event) return res.status(404).json({ message: 'Event not found!' });
+        await sendMail(email,'Hi','<p>Hi</p>');
+        res.status(200).json({ message: 'Email sent successfully' });
+    } catch(error) {
+        return res.status(500).json({ message:'Server Error' });
     }
 }

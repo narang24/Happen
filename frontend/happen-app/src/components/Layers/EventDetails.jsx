@@ -10,16 +10,21 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import { getInitials, validateEmail } from '../../utils/helper';
 import EventModal from '../EventModal';
 import toast from 'react-hot-toast';
+import DeleteModal from '../deleteModal';
 
 const EventDetails = () => {
 
   const navigate = useNavigate();
+
+  const [selectDelete, setSelectDelete] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
   const [eventData, setEventData] = useState(null);
   const { id } = useParams();
 
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const images = ['/cardBg.png','/cardBg2.png','/cardBg3.png','/cardBg4.png','/cardBg5.png'];
 
@@ -48,7 +53,74 @@ const EventDetails = () => {
     }
   }
 
-  const addEmail = () => {}
+  const editEvent = async () => {
+
+    if(email) eventData.participants = [...eventData.participants, { email, status: 'Pending' }];
+  
+    try {
+      const response = await axiosInstance.put(`/api/event/edit-event/${id}`,{
+        title: eventData.title,
+        time: eventData.time,
+        date: eventData.date,
+        location: eventData.location,
+        description: eventData.description,
+        participants: eventData.participants
+      });
+      if(response.data) {
+        console.log('Participant added successfully!');
+      }
+    } catch(error) {
+      console.log('Server Error');
+    }
+  }
+
+  const sendInvite = async () => {
+    if(!email) {
+      setError("Email is required");
+      return;
+    }
+    const validEmail = validateEmail(email);
+    if(!validEmail) {
+      setError('Invalid Email Address');
+      return;
+    }
+    if(eventData.participants.some(p => p.email === email)) {
+      setError('Email Address already invited');
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post(`/api/event/get-event/${id}/invite`, { email });
+      if(response.data) {
+        editEvent();
+        toast.success(response.data.message,{
+          duration: 700,
+        });
+        setLoading(false);
+        setTimeout(() => {
+          getEvent();
+          setEmail('');
+        },300);
+      } 
+    } catch(error) {
+      console.log("Server Error");
+    }
+
+  }
+
+  const deleteEmail = (item) => {
+    try {
+      eventData.participants = eventData.participants.filter((i) => i.email!==item.email);
+      setEmail("");
+      editEvent();
+      toast.success('Invitation withdrawn successfully', {
+        duration:1000
+      })
+      getEvent();
+    } catch(error) {
+      console.log('Error deleting email');
+    }
+  }
 
   useEffect(() => {
     getEvent();
@@ -61,7 +133,7 @@ const EventDetails = () => {
         <button className='flex items-center gap-2 text-xs px-4 py-3 border border-[#B7410E]/20 rounded-lg cursor-pointer font-semibold' onClick={() => navigate('/Events')}><IoMdArrowRoundBack className='text-[15px]'/> Back</button>
         <div className='flex items-center gap-3'>
             <button className='flex items-center gap-2 bg-[#B7410E]/90 text-white text-xs px-4 py-3 rounded-lg cursor-pointer' onClick={() => setOpenModal(true)}><TbEdit className='text-[15px]'/> Edit</button>
-            <button className='flex items-center gap-2 text-xs px-4 py-3 border border-[#B7410E]/20 rounded-lg cursor-pointer font-semibold' onClick={deleteEvent}><MdDelete className='text-[15px]'/> Delete</button>
+            <button className='flex items-center gap-2 text-xs px-4 py-3 border border-[#B7410E]/20 rounded-lg cursor-pointer font-semibold' onClick={() => { setSelectDelete(true); }}><MdDelete className='text-[15px]'/> Delete</button>
         </div>
       </div>
 
@@ -104,8 +176,9 @@ const EventDetails = () => {
           <label className='text-xs'>Invite email</label>
           <div className='flex gap-1.5'>
             <input type="text" placeholder='Enter email address' className='text-[13px] px-3 py-2 border border-[#B7410E]/20 rounded-lg flex-1 outline-none' value={email} onChange={({ target }) => setEmail(target.value)}/>
-            <button className='text-white bg-[#B7410E]/90 text-[11px] px-3 py-2 rounded-lg cursor-pointer' onClick={addEmail}>Send Invite</button>
+            <button className='text-white bg-[#B7410E]/90 text-[11px] px-3 py-2 rounded-lg cursor-pointer' onClick={sendInvite}>{loading?"Sending":"Send Invite"}</button>
           </div>
+          {error && <p className='text-[11px] text-red-700 px-1'>*{error}</p>}
         </div>
 
         <div className='flex-1 p-2 flex flex-col gap-4 overflow-y-auto scrollbar-hide'>
@@ -121,7 +194,7 @@ const EventDetails = () => {
                 <div className={`${item.status==='Accepted'?'bg-green-700':(item.status==='Declined'?'bg-red-700':'bg-yellow-500')} h-1 w-1 rounded-full`}/>
                 <p>{item.status}</p>
                 </div>
-                <button className='text-[15px] text-gray-900/50 hover:text-red-700 cursor-pointer'><HiOutlineTrash /></button>
+                <button className='text-[15px] text-gray-900/50 hover:text-red-700 cursor-pointer' onClick={() => deleteEmail(item)}><HiOutlineTrash /></button>
               </div>
 
             </div>
@@ -140,6 +213,10 @@ const EventDetails = () => {
       onClose={() => setOpenModal(!openModal)}
       />}
     
+      {selectDelete && <DeleteModal
+      onClose={() => setSelectDelete(!selectDelete)}
+      deleteEvent={deleteEvent}
+      />}
     </div>
   )
 }
