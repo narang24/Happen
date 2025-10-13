@@ -9,6 +9,8 @@ const authRoutes = require('./routes/authRoutes')
 const eventRoutes = require('./routes/eventRoutes')
 const path = require('path');
 const multer = require('multer');
+const cron = require('node-cron');
+const sendReminders = require("./helpers/sendReminders");
 
 const app = express();
 
@@ -42,6 +44,10 @@ connectDB();
 
 app.use('/api/auth',authRoutes);
 app.use('/api/event',eventRoutes);
+
+cron.schedule("18 18 * * *",() => {
+    sendReminders();
+})
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
