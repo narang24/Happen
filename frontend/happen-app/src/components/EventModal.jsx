@@ -12,7 +12,7 @@ import moment from 'moment';
 const EventModal = ({ type, getAllEvents, eventData, getEvent, onClose }) => {
 
     const [title, setTitle] = useState(eventData?.title || "");
-    const [time, setTime] = useState(eventData?.time.start || "");
+    const [time, setTime] = useState("");
     const [date, setDate] = useState(eventData?.date ? moment(eventData.date).format("YYYY-MM-DD") : "");
     const [location, setLocation] = useState(eventData?.location || "");
     const [description, setDescription] = useState(eventData?.description || "");

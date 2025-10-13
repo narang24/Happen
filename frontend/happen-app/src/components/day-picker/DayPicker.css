@@ -1,0 +1,133 @@
+/* DayPicker.css */
+.rdrCalendarWrapper {
+  border: none;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: 320px;
+}
+
+.rdrMonth {
+  width: 100%;
+}
+
+.rdrMonthAndYearWrapper {
+  justify-content: center;
+  font-weight: 600;
+}
+
+.rdrMonthAndYearPickers {
+  color: #B7410E;       
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.rdrNextPrevButton {
+  background-color: rgba(183,65,14,0.2) !important;  /* background */
+  color: #B7410E !important;
+  box-shadow: none;
+}
+
+.rdrNextPrevButton:hover {
+  background-color: #B7410E !important;
+  color: #B7410E !important;
+  transition: 0.3s;
+}
+
+.rdrNextPrevButton i {
+  fill: #B7410E !important;
+  transition: fill 0.3s ease;
+}
+
+.rdrNextPrevButton:hover i {
+  fill: #fff !important;
+}
+
+.rdrWeekDay {
+  color: #B7410E;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.rdrDayNumber span {
+  color: #B7410E;
+  font-weight: 500;
+}
+
+.rdrDayToday .rdrDayNumber span:after {
+  display: none; /* remove today dot */
+}
+
+.rdrInRange, .rdrStartEdge, .rdrEndEdge {
+  background: #B7410E;
+  color: white;
+}
+
+.rdrStartEdge, .rdrEndEdge {
+    border-radius: 50%;
+}
+
+.rdrInRange {
+    position: relative;
+}
+
+.rdrInRange::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+} 
+/* 
+overall calendar look
+.rdrCalendarWrapper {
+  border: none;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  width: 320px;
+}
+
+remove today dot
+.rdrDayToday .rdrDayNumber span:after {
+  display: none;
+}
+
+green highlight for selected range
+.rdrInRange,
+.rdrStartEdge,
+.rdrEndEdge {
+  background: #B7410E !important;
+}
+
+make middle range lighter (green fill)
+.rdrInRange {
+  opacity: 1;
+  border-radius: 0 !important;
+}
+
+capsule-like edges
+.rdrStartEdge,
+.rdrEndEdge {
+  border-radius: 9999px ; 
+  position: relative;
+  opacity: 1;
+}
+
+white text for selected edges
+.rdrDayNumber span {
+  color: #B7410E;
+  font-weight: 500;
+}
+
+.rdrStartEdge .rdrDayNumber span,
+.rdrEndEdge .rdrDayNumber span {
+  color: #B7410E;
+}
+
+subtle border around the full range
+.rdrInRange::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+} */

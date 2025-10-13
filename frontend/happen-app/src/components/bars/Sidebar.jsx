@@ -1,13 +1,12 @@
 import React from 'react'
 import ProfileInfoCard from '../cards/ProfileInfoCard'
-import { DayPicker } from "react-day-picker";
 import { useState } from 'react';
 import { CiCalendar } from "react-icons/ci";
 import { BsThreeDots } from "react-icons/bs";
 import { IoMdClose } from "react-icons/io";
-import "react-day-picker/dist/style.css";
 import moment from 'moment';
 import { getInitials } from '../../utils/helper';
+import DayPicker from '../day-picker/DayPicker';
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const [range, setRange] = useState(null);
@@ -36,6 +35,9 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           }}
         />
       </div> */}
+      <div className='p-5'>
+        <DayPicker/>
+      </div>
 
       <div className='flex flex-col flex-1 p-5 rounded-xl m-3 mr-0'>
         <div className='flex justify-between items-center'>
