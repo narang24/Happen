@@ -7,6 +7,7 @@ const cors = require('cors');
 const connectDB = require("./config/db");
 const authRoutes = require('./routes/authRoutes')
 const eventRoutes = require('./routes/eventRoutes')
+const invitationRoutes = require('./routes/invitationRoutes')
 const path = require('path');
 const multer = require('multer');
 const cron = require('node-cron');
@@ -44,6 +45,7 @@ connectDB();
 
 app.use('/api/auth',authRoutes);
 app.use('/api/event',eventRoutes);
+app.use('/api/invitation',invitationRoutes);
 
 cron.schedule("18 18 * * *",() => {
     sendReminders();

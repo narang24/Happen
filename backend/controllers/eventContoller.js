@@ -1,6 +1,7 @@
 const EmailHTML = require('../EmailHTML');
 const sendMail = require('../helpers/sendMail');
 const Event = require('../models/Event');
+const Invitation = require('../models/Invitation');
 const User = require('../models/User');
 
 exports.addEvent = async (req, res) => {
@@ -23,6 +24,20 @@ exports.addEvent = async (req, res) => {
             participants,
             userId,
         });
+
+        for(const participant of participants) {
+            const isUser = await User.findOne({ email: participant.email });
+            if(isUser) {
+                await Invitation.create({
+                    eventId: event._id,
+                    inviteeId: isUser._id,
+                    inviterId: userId,
+                    status: participant.status,
+                    date: date,
+                });
+            };
+        }
+
         res.status(201).json({ message: 'Event Added Successfully!'});
 
     } catch(error) {
