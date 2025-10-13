@@ -33,6 +33,7 @@ const EventDetails = () => {
     const response = await axiosInstance.get(`/api/event/get-event/${id}`);
     if(response.data) {
       setEventData(response.data);
+      setError("");
     }
   } catch(error) {
     console.log('Server Error');
@@ -139,7 +140,7 @@ const EventDetails = () => {
 
       <div className='flex flex-col md:flex-row gap-5'>
       
-      <div className='flex-1'>
+      <div className='w-2/5'>
       {eventData &&
       <div className='relative text-white p-4 rounded-2xl shadow-md hover:shadow-lg h-[50vh]'>
 
