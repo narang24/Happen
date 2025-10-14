@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { HiOutlineLogout } from "react-icons/hi";
 import { tabs } from '../../utils/constants'
 import Tab from '../Tabs/Tab'
 
@@ -13,11 +14,13 @@ const Navbar = () => {
           <h1 className='text-[#B7410E] font-[500] text-lg'>Happen</h1>
       </div>
 
-      <div className='flex flex-col gap-4 my-10'>
+      <div className='flex flex-col gap-3.5 my-10'>
         {tabs.map((item, idx) => (
         <Tab item={item} index={idx} selected={selected} setSelected={setSelected} isSelected={selected===item.name}/>
         ))}
       </div>
+
+      <button className='flex items-center gap-2 text-[13px] font-[410] text-[#B7410E]/85 hover:bg-[#B7410E]/10 px-12 py-3 rounded-xl absolute bottom-5 cursor-pointer'><HiOutlineLogout size={20}/> Log Out</button>
     </div>
   )
 }

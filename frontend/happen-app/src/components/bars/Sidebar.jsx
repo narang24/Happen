@@ -34,11 +34,11 @@ const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
           }}
         />
       </div> */}
-      <div className='p-5'>
+      <div className='p-5 pb-0'>
         <DayPicker/>
       </div>
 
-      <div className='flex flex-col flex-1 p-5 rounded-xl m-3 mr-0'>
+      <div className='flex flex-col flex-1 p-5 rounded-xl mx-3 mr-0'>
         <div className='flex justify-between items-center'>
           <h3 className='font-semibold'>Your Schedule</h3>
           <div className='hover:bg-[#B7410E]/10 p-2 rounded-xl cursor-pointer'><BsThreeDots className='text-[15px]'/></div>

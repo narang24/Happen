@@ -15,7 +15,7 @@ const Tab = ({ item, index, selected, setSelected, isSelected }) => {
     return (
         <div className={`flex items-center gap-4 px-9 py-5 rounded-2xl ${isSelected?'bg-[#B7410E] text-white shadow-lg':'text-[#B7410E]'} cursor-pointer`} onClick={() => {navigate(`/${item.name}`); setSelected(item.name);}}>
         <IconComponent  className='text-lg'/>
-        <p className='text-[13px]'>{item.name}</p>
+        <p className='text-[13px] font-[400]'>{item.name}</p>
         </div>
     )
 }

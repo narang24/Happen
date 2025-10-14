@@ -128,7 +128,7 @@ const EventDetails = () => {
   },[id]);
 
   return (
-    <div className='flex flex-col mt-9'>
+    <div className='flex flex-1 overflow-y-auto flex-col mt-9'>
 
       <div className='flex justify-between items-center mb-5'>
         <button className='flex items-center gap-2 text-xs px-4 py-3 border border-[#B7410E]/20 rounded-lg cursor-pointer font-semibold' onClick={() => navigate('/Events')}><IoMdArrowRoundBack className='text-[15px]'/> Back</button>
@@ -138,9 +138,9 @@ const EventDetails = () => {
         </div>
       </div>
 
-      <div className='flex flex-col md:flex-row gap-5'>
+      <div className='flex flex-col md:flex-row gap-5 overflow-y-auto'>
       
-      <div className='w-2/5'>
+      <div className='md:w-2/5'>
       {eventData &&
       <div className='relative text-white p-4 rounded-2xl shadow-md hover:shadow-lg h-[50vh]'>
 

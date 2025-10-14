@@ -3,6 +3,7 @@ import EventModal from '../../EventModal'
 import { FiSliders } from "react-icons/fi";
 import axiosInstance from '../../../utils/axiosInstance';
 import { IoLocationOutline } from "react-icons/io5";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import moment from 'moment';
 import { getInitials } from '../../../utils/helper';
 import { useNavigate } from 'react-router-dom';
@@ -32,7 +33,7 @@ const Events = () => {
   },[])
 
   return (
-    <div className='flex flex-1 flex-col md:flex-row gap-5 mt-9 overflow-y-auto scrollbar-hide'>
+    <div className='flex flex-1 flex-col gap-6 mt-9 overflow-y-auto scrollbar-hide'>
       
       <div className='h-[50vh] flex-1 p-4 md:p-5 bg-white rounded-xl shadow-gray-300/50 shadow-sm hover:shadow-md'>
 
@@ -63,6 +64,7 @@ const Events = () => {
                 }
               </div>
             </div>
+            <button><MdKeyboardArrowRight size={22}/></button>
           </div>
         ))}
       </div>
@@ -97,6 +99,7 @@ const Events = () => {
                 }
               </div>
             </div>
+            <button><MdKeyboardArrowRight size={22}/></button>
           </div>
         ))}
       </div>
