@@ -9,7 +9,6 @@ import { getInitials } from '../../utils/helper';
 import DayPicker from '../day-picker/DayPicker';
 
 const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
-  const [range, setRange] = useState(null);
   
   const data = [
     {img:'/cardBg.png', title: 'Seminar', date: '2025-08-28', participants: ['r@gmail.com','l@gmail.com','m@gmail.com']},

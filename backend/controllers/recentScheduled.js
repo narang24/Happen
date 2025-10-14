@@ -30,9 +30,9 @@ exports.getRecentScheduledInvitations = async (req, res) => {
     const now = new Date();
     
     try {
-        const recentInvitations = await Invitation.find({ inviteeId: userId, date: { $lt: now } }).sort({ date: -1 });
+        const recentInvitations = await Invitation.find({ inviteeId: userId, date: { $lt: now } }).populate('eventId', 'title location description').populate('inviterId', 'username email profileImageUrl').sort({ date: -1 });
 
-        const scheduledInvitations = await Invitation.find({ inviteeId: userId, date: { $gte: now } }).sort({ date: 1 });
+        const scheduledInvitations = await Invitation.find({ inviteeId: userId, date: { $gte: now } }).populate('eventId', 'title location description').populate('inviterId', 'username email profileImageUrl').sort({ date: 1 });
 
         if(!recentInvitations || !scheduledInvitations) {
             return res.status(404).json({ message: 'User Data not found' });
