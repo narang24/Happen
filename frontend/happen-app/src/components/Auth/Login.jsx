@@ -1,6 +1,6 @@
 import React from 'react'
 import { IoMdClose } from "react-icons/io";
-import Input from '../inputs/input';
+import Input from '../inputs/Input';
 import { useState } from 'react';
 import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';

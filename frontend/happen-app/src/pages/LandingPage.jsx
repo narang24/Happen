@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Headbar from '../components/bars/headbar'
+import Headbar from '../components/bars/Headbar'
 import { stats, steps } from '../utils/constants'
 import { IoLogoInstagram, IoPlay } from "react-icons/io5";
 import StepCards from '../components/cards/StepCards';

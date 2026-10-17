@@ -2,7 +2,7 @@ import React from 'react'
 import { IoMdClose } from "react-icons/io";
 import { LuUser, LuUpload } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
-import Input from '../inputs/input';
+import Input from '../inputs/Input';
 import { useState } from 'react';
 import { validateEmail } from '../../utils/helper';
 import axiosInstance from '../../utils/axiosInstance';

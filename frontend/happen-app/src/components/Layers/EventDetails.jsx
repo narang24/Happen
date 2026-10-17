@@ -10,7 +10,7 @@ import { HiOutlineTrash } from "react-icons/hi2";
 import { getInitials, validateEmail } from '../../utils/helper';
 import EventModal from '../EventModal';
 import toast from 'react-hot-toast';
-import DeleteModal from '../deleteModal';
+import DeleteModal from '../DeleteModal';
 
 const EventDetails = () => {
 

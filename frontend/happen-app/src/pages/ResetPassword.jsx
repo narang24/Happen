@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Input from '../components/inputs/input';
+import Input from '../components/inputs/Input';
 import axiosInstance from '../utils/axiosInstance';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
