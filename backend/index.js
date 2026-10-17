@@ -17,12 +17,33 @@ const app = express();
 
 app.use(express.json())
 
-//Middleware to handle CORS
+// Middleware to handle CORS
 app.use(cors({
-    origin: process.env.CLIENT_URL || '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}))
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, or server-to-server)
+        if (!origin) return callback(null, true);
+
+        // Allow localhost origins on any port
+        if (/^http:\/\/localhost:\d+$/.test(origin)) return callback(null, true);
+
+        // Allow all Vercel deployment URLs (production and preview)
+        if (/\.vercel\.app$/.test(origin)) return callback(null, true);
+
+        // Allow explicitly configured CLIENT_URL (with or without trailing slash)
+        if (process.env.CLIENT_URL) {
+            const cleanClientUrl = process.env.CLIENT_URL.replace(/\/$/, '');
+            if (origin === cleanClientUrl || process.env.CLIENT_URL === '*') {
+                return callback(null, true);
+            }
+        }
+
+        // Allow the origin
+        return callback(null, true);
+    },
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
+}));
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
