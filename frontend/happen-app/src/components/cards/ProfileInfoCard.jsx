@@ -7,23 +7,26 @@ const ProfileInfoCard = () => {
 
     const userData = useContext(UserContext);
 
+    if (!userData) return null;
+
     return (
-        <div>
-        {userData && 
-        <div className='flex justify-center items-center gap-5'>
-            <div className='flex justify-center items-center gap-3 text-[#B7410E] p-2'>
-            {userData.profileImageUrl?
-            <img src={userData.profileImageUrl} alt="profile-photo" className='h-9 w-9 rounded-full'/>
-            :
-            <div className='h-9 w-9 rounded-full bg-[#B7410E]/10 text-[#B7410E] flex justify-center items-center font-semibold'>{getInitials(userData.username)}</div>
-            }
-            <div>
-                <p className='text-[13px] font-semibold'>{userData.username}</p>
-                <p className='text-xs text-[#B7410E]/70'>{userData.email}</p>
+        <div className='w-full flex items-center justify-between p-3 bg-white border border-[#B7410E]/10 rounded-2xl shadow-sm hover:shadow-md transition-all cursor-pointer'>
+            <div className='flex items-center gap-2.5 text-[#B7410E] min-w-0'>
+                {userData.profileImageUrl ? (
+                    <img src={userData.profileImageUrl} alt="profile-photo" className='h-9 w-9 rounded-full shrink-0 object-cover'/>
+                ) : (
+                    <div className='h-9 w-9 rounded-full bg-[#B7410E]/10 text-[#B7410E] flex justify-center items-center font-semibold shrink-0 text-xs'>
+                        {getInitials(userData.username)}
+                    </div>
+                )}
+                <div className='min-w-0 flex-1'>
+                    <p className='text-[13px] font-semibold truncate leading-tight'>{userData.username}</p>
+                    <p className='text-[11px] text-[#B7410E]/70 truncate leading-tight'>{userData.email}</p>
+                </div>
             </div>
-            </div>
-            <button className='text-xs text-[#B7410E] cursor-pointer hover:bg-[#B7410E]/10 p-1.5 rounded-lg'><FaChevronDown/></button>
-        </div>}
+            <button className='text-xs text-[#B7410E] shrink-0 p-1.5 hover:bg-[#B7410E]/10 rounded-lg cursor-pointer transition-colors'>
+                <FaChevronDown />
+            </button>
         </div>
     )
 }

@@ -1,2 +1,51 @@
+# Dependencies
 node_modules/
+*/node_modules/
+
+# Environment variables & secrets
 .env
+.env.*
+*.env
+*.local
+
+# Production / build artifacts
+dist/
+dist-ssr/
+build/
+.vite/
+
+# User uploads (multer / static user media)
+backend/uploads/*
+!backend/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Editor & IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Operating System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Caches
+.eslintcache
+.cache/

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Event = require('../models/Event');
 
-exports.getRecentScheduledEvents = async (req, res) => {
+const getRecentScheduled = async (req, res) => {
 
     const userId = req.user.id;
 
@@ -21,3 +21,6 @@ exports.getRecentScheduledEvents = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 }
+
+exports.getRecentScheduledEvents = getRecentScheduled;
+exports.getRecentScheduledInvitations = getRecentScheduled;

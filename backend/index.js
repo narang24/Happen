@@ -7,8 +7,11 @@ const cors = require('cors');
 const connectDB = require("./config/db");
 const authRoutes = require('./routes/authRoutes')
 const eventRoutes = require('./routes/eventRoutes')
+const invitationRoutes = require('./routes/invitationRoutes')
 const path = require('path');
 const multer = require('multer');
+const cron = require('node-cron');
+const sendReminders = require("./helpers/sendReminders");
 
 const app = express();
 
@@ -17,7 +20,7 @@ app.use(express.json())
 //Middleware to handle CORS
 app.use(cors({
     origin: process.env.CLIENT_URL || '*',
-    methods: ['GET','POST','PUT','DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
@@ -35,13 +38,18 @@ const upload = multer({ storage: storage });
 app.use('/uploads', express.static('uploads'));
 
 app.post('/upload', upload.single('file'), (req, res) => {
-    res.json({ message: 'File uploaded successfully', fileUrl: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`})
+    res.json({ message: 'File uploaded successfully', fileUrl: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}` })
 });
 
 connectDB();
 
-app.use('/api/auth',authRoutes);
-app.use('/api/event',eventRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/event', eventRoutes);
+app.use('/api/invitation', invitationRoutes);
+
+cron.schedule("18 18 * * *", () => {
+    sendReminders();
+})
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
