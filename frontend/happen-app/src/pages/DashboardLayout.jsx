@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import Sidebar from '../components/bars/Sidebar'
-import { UserContext } from '../utils/userContext';
+import { UserContext } from '../utils/UserContext';
 import axiosInstance from '../utils/axiosInstance';
 import Navbar from '../components/bars/Navbar';
 import Topbar from '../components/bars/Topbar';

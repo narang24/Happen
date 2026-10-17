@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { getInitials } from '../../utils/helper';
-import { UserContext } from '../../utils/userContext';
+import { UserContext } from '../../utils/UserContext';
 import { FaChevronDown } from "react-icons/fa6";
 
 const ProfileInfoCard = () => {

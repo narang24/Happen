@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { UserContext } from '../../utils/userContext'
+import { UserContext } from '../../utils/UserContext'
 import { FiSearch } from "react-icons/fi";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
